@@ -1,0 +1,5 @@
+apiVersion: v2
+name: certificate-ui
+description: A certificate tracking and renewal UI with Ansible job
+version: 0.1.0
+appVersion: "1.0.0"
