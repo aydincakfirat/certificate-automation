@@ -21,8 +21,5 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: CERT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: certificate-secrets
-                  key: secret_key
+            - name: CERT_FILE
+              value: "/app/certs.json"
