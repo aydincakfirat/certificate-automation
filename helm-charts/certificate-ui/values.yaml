@@ -9,18 +9,13 @@ service:
   type: ClusterIP
   port: 80
 
-ingress:
-  enabled: false
-  annotations: {}
-  hosts:
-    - host: certificate-ui.local
-      paths:
-        - /
-
 ansibleJob:
   enabled: true
   image:
-    repository: aydincakfirat/certificate-ansible
+    repository: aydincakfirat/certificate-automation
     tag: latest
-  schedule: "0 0 * * *"  # günlük çalışacak şekilde cronjob
+  schedule: "0 0 * * *"
   secretName: certificate-secrets
+
+fullnameOverride: ""
+nameOverride: ""
