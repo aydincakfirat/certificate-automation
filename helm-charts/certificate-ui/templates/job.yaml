@@ -14,16 +14,6 @@ spec:
             - name: certificate-ansible
               image: "{{ .Values.ansibleJob.image.repository }}:{{ .Values.ansibleJob.image.tag }}"
               env:
-                - name: CERT_SECRET
-                  valueFrom:
-                    secretKeyRef:
-                      name: {{ .Values.ansibleJob.secretName }}
-                      key: secret_key
-              volumeMounts:
-                - name: ansible-playbooks
-                  mountPath: /ansible/playbooks
-          volumes:
-            - name: ansible-playbooks
-              configMap:
-                name: certificate-ansible-playbooks
+                - name: CERT_FILE
+                  value: "/app/certs.json"
 {{- end }}
