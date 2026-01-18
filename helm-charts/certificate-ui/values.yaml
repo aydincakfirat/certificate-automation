@@ -2,7 +2,7 @@
 replicaCount: 1
 
 image:
-  repository: aydincakfirat/certificate-automation
+  repository: firataydincak/certificate-automation
   tag: latest
   pullPolicy: IfNotPresent
 
