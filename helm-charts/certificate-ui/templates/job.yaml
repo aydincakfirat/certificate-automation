@@ -1,0 +1,29 @@
+{{- if .Values.ansibleJob.enabled }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "certificate-ui.fullname" . }}-ansible
+spec:
+  schedule: "{{ .Values.ansibleJob.schedule }}"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: certificate-ansible
+              image: "{{ .Values.ansibleJob.image.repository }}:{{ .Values.ansibleJob.image.tag }}"
+              env:
+                - name: CERT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ .Values.ansibleJob.secretName }}
+                      key: secret_key
+              volumeMounts:
+                - name: ansible-playbooks
+                  mountPath: /ansible/playbooks
+          volumes:
+            - name: ansible-playbooks
+              configMap:
+                name: certificate-ansible-playbooks
+{{- end }}
