@@ -1,3 +1,4 @@
+# values.yaml
 replicaCount: 1
 
 image:
@@ -8,6 +9,16 @@ image:
 service:
   type: ClusterIP
   port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
 
 ansibleJob:
   enabled: true
