@@ -1,0 +1,4 @@
+[
+  {"id": "cert1", "domain": "example.com", "status": "valid"},
+  {"id": "cert2", "domain": "test.com", "status": "expired"}
+]
