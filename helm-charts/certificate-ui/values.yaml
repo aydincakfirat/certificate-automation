@@ -1,0 +1,26 @@
+replicaCount: 1
+
+image:
+  repository: aydincakfirat/certificate-ui
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: certificate-ui.local
+      paths:
+        - /
+
+ansibleJob:
+  enabled: true
+  image:
+    repository: aydincakfirat/certificate-ansible
+    tag: latest
+  schedule: "0 0 * * *"  # günlük çalışacak şekilde cronjob
+  secretName: certificate-secrets
