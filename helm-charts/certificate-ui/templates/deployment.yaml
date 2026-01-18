@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "certificate-ui.fullname" . }}
+  labels:
+    app: {{ include "certificate-ui.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "certificate-ui.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "certificate-ui.name" . }}
+    spec:
+      containers:
+        - name: certificate-ui
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 80
+          env:
+            - name: CERT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: certificate-secrets
+                  key: secret_key
