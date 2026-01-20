@@ -21,5 +21,11 @@ spec:
                     name: {{ .Values.CronJob.secretName }}
               volumeMounts:
                 - name: ansible-data
-                  mountPath: /data
+                  mountPath: {{ .Values.volume.mountPath }}
+
+              volumes:
+                - name: ansible-data
+                  persistentVolumeClaim:
+                    claimName: {{ include "certificate-ui.fullname" . }}-ansible-pvc
+
 {{- end }}
