@@ -26,7 +26,7 @@ ansibleJob:
   enabled: true
   image:
     repository: aydincakfirat/certificate-automation
-    tag: latest
+    tag: v5
   schedule: "0 0 * * *"
   secretName: certificate-secrets
 
