@@ -24,8 +24,8 @@ ingress:
 CronJob:
   enabled: true
   image:
-    repository: aydincakfirat/certificate-automation
-    tag: v5
+    repository: alpine/ansible
+    tag: latest
   schedule: "0 0 * * *"
   secretName: certificate-secrets
 
