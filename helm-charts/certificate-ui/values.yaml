@@ -29,6 +29,11 @@ CronJob:
   schedule: "0 0 * * *"
   secretName: certificate-secrets
 
+volume:
+  enabled: true
+  size: 5Gi
+  mountPath: /data
+
 secrets:
   username: admin
   password: "123456"
