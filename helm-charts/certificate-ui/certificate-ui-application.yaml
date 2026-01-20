@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: certificate-ui
-  namespace: certificate-ui
+  namespace: argocd   # Application objesi ArgoCD namespace'inde olacak
 spec:
   project: default
   source:
@@ -14,7 +14,7 @@ spec:
         - values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: default
+    namespace: certificate-ui   # uygulamanın deploy olacağı namespace
   syncPolicy:
     automated:
       prune: true
