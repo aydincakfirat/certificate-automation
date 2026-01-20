@@ -1,10 +1,10 @@
-{{- if .Values.ansibleJob.enabled }}
+{{- if .Values.CronJob.enabled }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ include "certificate-ui.fullname" . }}-ansible
 spec:
-  schedule: "{{ .Values.ansibleJob.schedule }}"
+  schedule: "{{ .Values.CronJob.schedule }}"
   jobTemplate:
     spec:
       template:
@@ -12,8 +12,11 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: certificate-ansible
-              image: "{{ .Values.ansibleJob.image.repository }}:{{ .Values.ansibleJob.image.tag }}"
+              image: "{{ .Values.CronJob.image.repository }}:{{ .Values.CronJob.image.tag }}"
               env:
                 - name: CERT_FILE
                   value: "/app/certs.json"
+              envFrom:
+                - secretRef:
+                    name: {{ .Values.CronJob.secretName }}
 {{- end }}
