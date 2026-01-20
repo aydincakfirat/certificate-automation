@@ -13,7 +13,7 @@ spec:
           containers:
             - name: certificate-ansible
               image: "{{ .Values.CronJob.image.repository }}:{{ .Values.CronJob.image.tag }}"
-              command: ["ansible-playbook"]
+              #command: ["ansible-playbook"]
               args:
                 - "{{ .Values.volume.mountPath }}/playbook.yml"
               envFrom:
