@@ -13,9 +13,9 @@ spec:
           containers:
             - name: certificate-ansible
               image: "{{ .Values.CronJob.image.repository }}:{{ .Values.CronJob.image.tag }}"
-              env:
-                - name: CERT_FILE
-                  value: "/app/certs.json"
+              command: ["ansible-playbook"]
+              args:
+                - "/app/playbook.yml"
               envFrom:
                 - secretRef:
                     name: {{ .Values.CronJob.secretName }}
