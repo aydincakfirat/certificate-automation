@@ -13,17 +13,10 @@ spec:
           containers:
             - name: certificate-ansible
               image: "{{ .Values.CronJob.image.repository }}:{{ .Values.CronJob.image.tag }}"
-              command: ["ansible-playbook"]               # <-- burada playbook değil komut
+              command: ["ansible-playbook"]
               args:
-                - "{{ .Values.volume.mountPath }}/playbook.yml"  # <-- playbook dosyası arg olarak veriliyor
+                - "/app/playbook.yml"   # playbook container içinde olmalı
               envFrom:
                 - secretRef:
                     name: {{ .Values.CronJob.secretName }}
-              volumeMounts:
-                - name: ansible-data
-                  mountPath: "{{ .Values.volume.mountPath }}"
-          volumes:
-            - name: ansible-data
-              persistentVolumeClaim:
-                claimName: {{ include "certificate-ui.fullname" . }}-ansible-pvc
 {{- end }}
