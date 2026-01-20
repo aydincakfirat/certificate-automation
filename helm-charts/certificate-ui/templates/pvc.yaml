@@ -1,4 +1,4 @@
-{{- if and .Values.CronJob.enabled .Values.volume.enabled }}
+{{- if .Values.CronJob.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -8,5 +8,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.volume.size }}
+      storage: {{ .Values.volume.size | default "5Gi" }}
 {{- end }}
