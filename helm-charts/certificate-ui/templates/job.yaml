@@ -19,4 +19,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: {{ .Values.CronJob.secretName }}
+              volumeMounts:
+                - name: ansible-data
+                  mountPath: /data
 {{- end }}
