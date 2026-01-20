@@ -1,0 +1,15 @@
+{{- if .Values.CronJob.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "certificate-ui.fullname" . }}-ansible-pvc
+  labels:
+    app.kubernetes.io/name: {{ include "certificate-ui.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+{{- end }}
