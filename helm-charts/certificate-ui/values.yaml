@@ -22,7 +22,7 @@ ingress:
   tls: []
 
 
-ansibleJob:
+CronJob:
   enabled: true
   image:
     repository: aydincakfirat/certificate-automation
