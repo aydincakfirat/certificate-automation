@@ -25,5 +25,5 @@ spec:
           volumes:
             - name: ansible-data
               persistentVolumeClaim:
-                claimName: {{ include "certificate-ui.fullname" . }}-ansible-pvc
+                claimName: certificate-ui-certificate-ui-ansible-pvc
 {{- end }}
