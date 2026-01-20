@@ -21,6 +21,18 @@ ingress:
           pathType: ImplementationSpecific
   tls: []
 
+CronJob:
+  enabled: true
+  image:
+    repository: aydincakfirat/certificate-automation
+    tag: v5
+  schedule: "0 0 * * *"
+  secretName: certificate-secrets
+
+secrets:
+  username: admin
+  password: "123456"
+
 
 CronJob:
   enabled: true
