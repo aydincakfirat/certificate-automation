@@ -15,17 +15,15 @@ spec:
               image: "{{ .Values.CronJob.image.repository }}:{{ .Values.CronJob.image.tag }}"
               command: ["ansible-playbook"]
               args:
-                - "/app/playbook.yml"
+                - "{{ .Values.volume.mountPath }}/playbook.yml"
               envFrom:
                 - secretRef:
                     name: {{ .Values.CronJob.secretName }}
               volumeMounts:
                 - name: ansible-data
-                  mountPath: {{ .Values.volume.mountPath }}
-
-              volumes:
-                - name: ansible-data
-                  persistentVolumeClaim:
-                    claimName: {{ include "certificate-ui.fullname" . }}-ansible-pvc
-
+                  mountPath: "{{ .Values.volume.mountPath }}"
+          volumes:
+            - name: ansible-data
+              persistentVolumeClaim:
+                claimName: {{ include "certificate-ui.fullname" . }}-ansible-pvc
 {{- end }}
