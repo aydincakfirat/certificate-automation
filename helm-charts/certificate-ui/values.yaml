@@ -25,7 +25,7 @@ ingress:
 CronJob:
   enabled: true
   image:
-    repository: aydincakfirat/certificate-automation
+    repository: firataydincak/certificate-automation
     tag: v5
   schedule: "0 0 * * *"
   secretName: certificate-secrets
