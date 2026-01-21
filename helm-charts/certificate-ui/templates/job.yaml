@@ -15,8 +15,17 @@ spec:
               image: "{{ .Values.CronJob.image.repository }}:{{ .Values.CronJob.image.tag }}"
               command: ["ansible-playbook"]
               args:
-                - "/app/playbook.yml"   # playbook container içinde olmalı
+                - "-i"
+                - "/app/inventory"
+                - "/app/playbook.yml"
               envFrom:
                 - secretRef:
                     name: {{ .Values.CronJob.secretName }}
+              volumeMounts:
+                - name: ansible-files
+                  mountPath: /app
+          volumes:
+            - name: ansible-files
+              configMap:
+                name: {{ include "certificate-ui.fullname" . }}-ansible
 {{- end }}
