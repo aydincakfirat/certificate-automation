@@ -29,6 +29,20 @@ CronJob:
   schedule: "0 0 * * *"
   secretName: certificate-secrets
 
+ansible:
+  playbook: |
+    - hosts: localhost
+      connection: local
+      gather_facts: false
+      tasks:
+        - name: Test
+          debug:
+            msg: "Certificate automation works"
+
+  inventory: |
+    [localhost]
+    127.0.0.1
+
 secrets:
   username: admin
   password: "123456"
