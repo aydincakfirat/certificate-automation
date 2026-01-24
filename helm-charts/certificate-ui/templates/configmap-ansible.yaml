@@ -4,7 +4,7 @@ metadata:
   name: {{ include "certificate-ui.fullname" . }}-ansible
 data:
   playbook.yml: |
-{{ .Values.ansible.playbook | indent 4 }}
+{{ index .Values.ansible.playbooks .Values.ansible.selected "playbook" | indent 4 }}
 
   inventory: |
-{{ .Values.ansible.inventory | indent 4 }}
+{{ index .Values.ansible.playbooks .Values.ansible.selected "inventory" | indent 4 }}
