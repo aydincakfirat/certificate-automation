@@ -2,7 +2,8 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "certificate-ui.fullname" . }}-ansible
+  name: ansible-{{ .Values.ansible.selected }}
+  #name: {{ include "certificate-ui.fullname" . }}-ansible
 spec:
   schedule: "{{ .Values.CronJob.schedule }}"
   jobTemplate:
