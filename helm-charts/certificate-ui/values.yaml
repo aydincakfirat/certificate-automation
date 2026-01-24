@@ -30,18 +30,47 @@ CronJob:
   secretName: certificate-secrets
 
 ansible:
-  playbook: |
-    - hosts: localhost
-      connection: local
-      gather_facts: false
-      tasks:
-        - name: Test
-          debug:
-            msg: "Certificate automation works"
+  selected: wildcard   # ArgoCD UI'dan burası değiştirilecek
 
-  inventory: |
-    [localhost]
-    127.0.0.1
+  playbooks:
+    wildcard:
+      playbook: |
+        - hosts: localhost
+          connection: local
+          gather_facts: false
+          tasks:
+            - debug:
+                msg: "Wildcard cert updated"
+
+      inventory: |
+        [localhost]
+        127.0.0.1
+
+    abc:
+      playbook: |
+        - hosts: localhost
+          connection: local
+          gather_facts: false
+          tasks:
+            - debug:
+                msg: "ABC cert updated"
+
+      inventory: |
+        [localhost]
+        127.0.0.1
+
+    xyz:
+      playbook: |
+        - hosts: localhost
+          connection: local
+          gather_facts: false
+          tasks:
+            - debug:
+                msg: "XYZ cert updated"
+
+      inventory: |
+        [localhost]
+        127.0.0.1
 
 secrets:
   username: admin
