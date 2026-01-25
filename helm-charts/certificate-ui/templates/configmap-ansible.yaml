@@ -3,6 +3,11 @@ kind: ConfigMap
 metadata:
   name: {{ include "certificate-ui.fullname" . }}-ansible
 data:
+
+  ####################################################################
+  # PLAYBOOK GROUP: wildcard
+  # ansible.selected = wildcard
+  ####################################################################
   wildcard-playbook.yml: |
     - hosts: localhost
       connection: local
@@ -15,6 +20,11 @@ data:
     [localhost]
     127.0.0.1
 
+
+  ####################################################################
+  # PLAYBOOK GROUP: abc
+  # ansible.selected = abc
+  ####################################################################
   abc-playbook.yml: |
     - hosts: localhost
       connection: local
@@ -27,6 +37,11 @@ data:
     [localhost]
     127.0.0.1
 
+
+  ####################################################################
+  # PLAYBOOK GROUP: xyz
+  # ansible.selected = xyz
+  ####################################################################
   xyz-playbook.yml: |
     - hosts: localhost
       connection: local
@@ -39,6 +54,12 @@ data:
     [localhost]
     127.0.0.1
 
+
+  ####################################################################
+  # PLAYBOOK GROUP: pod-test
+  # ansible.selected = pod-test
+  # Purpose: TCP connectivity check to application pod
+  ####################################################################
   pod-test-playbook.yml: |
     - hosts: localhost
       connection: local
@@ -55,4 +76,3 @@ data:
             port: "{{ "{{ target_port }}" }}"
             timeout: 5
           delegate_to: localhost
-      
