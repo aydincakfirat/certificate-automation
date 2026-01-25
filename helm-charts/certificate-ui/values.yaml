@@ -29,10 +29,6 @@ CronJob:
   schedule: "0 0 * * *"
   secretName: certificate-secrets
 
-secrets:
-  username: admin
-  password: "123456"
-
 ansible:
   selected: wildcard   # ArgoCD UI'dan burası değiştirilecek
 
@@ -76,6 +72,9 @@ ansible:
         [localhost]
         127.0.0.1
 
+secrets:
+  username: admin
+  password: "123456"
 
 
 fullnameOverride: ""
