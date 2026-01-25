@@ -46,7 +46,7 @@ data:
 
       vars:
         target_pod_ip: 10.42.0.232
-        target_port: 8092
+        target_port: 80
 
       tasks:
         - name: Check TCP connectivity to pod
