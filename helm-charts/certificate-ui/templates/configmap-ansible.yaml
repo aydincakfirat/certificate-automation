@@ -3,8 +3,38 @@ kind: ConfigMap
 metadata:
   name: {{ include "certificate-ui.fullname" . }}-ansible
 data:
-  playbook.yml: |
-{{ index .Values.ansible.playbooks .Values.ansible.selected "playbook" | indent 4 }}
+  wildcard-playbook.yml: |
+    - hosts: localhost
+      connection: local
+      gather_facts: false
+      tasks:
+        - debug:
+            msg: "Wildcard cert updated"
 
-  inventory: |
-{{ index .Values.ansible.playbooks .Values.ansible.selected "inventory" | indent 4 }}
+  wildcard-inventory: |
+    [localhost]
+    127.0.0.1
+
+  abc-playbook.yml: |
+    - hosts: localhost
+      connection: local
+      gather_facts: false
+      tasks:
+        - debug:
+            msg: "ABC cert updated"
+
+  abc-inventory: |
+    [localhost]
+    127.0.0.1
+
+  xyz-playbook.yml: |
+    - hosts: localhost
+      connection: local
+      gather_facts: false
+      tasks:
+        - debug:
+            msg: "XYZ cert updated"
+
+  xyz-inventory: |
+    [localhost]
+    127.0.0.1
