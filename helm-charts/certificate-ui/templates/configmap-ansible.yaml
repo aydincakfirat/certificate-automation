@@ -38,3 +38,24 @@ data:
   xyz-inventory: |
     [localhost]
     127.0.0.1
+
+  pod-test-playbook.yml: |
+    - hosts: localhost
+      connection: local
+      gather_facts: false
+      
+      vars:
+        target_pod_ip: 10.42.0.232
+        target_port: 8092
+      tasks:
+        - name: Check TCP connectivity to pod
+          wait_for:
+            host: "{{ target_pod_ip }}"
+            port: "{{ target_port }}"
+            timeout: 5
+          delegate_to: localhost
+
+  pod-test-inventory: |
+    [localhost]
+    127.0.0.1
+      
