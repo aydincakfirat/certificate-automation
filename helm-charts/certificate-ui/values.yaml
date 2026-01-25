@@ -1,4 +1,4 @@
-e# values.yaml
+# values.yaml
 replicaCount: 1
 
 image:
