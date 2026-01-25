@@ -2,31 +2,36 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: ansible-{{ .Values.ansible.selected }}-job-{{ now | date "2006-01-02-15-04-05" }}
-  #name: {{ include "certificate-ui.fullname" . }}-ansible
+  name: ansible-{{ .Values.ansible.selected }}-job
 spec:
   schedule: "{{ .Values.CronJob.schedule }}"
   jobTemplate:
     spec:
+      backoffLimit: 1
       template:
         spec:
-          restartPolicy: OnFailure
+          restartPolicy: Never
           containers:
             - name: certificate-ansible
               image: "{{ .Values.CronJob.image.repository }}:{{ .Values.CronJob.image.tag }}"
-              command: ["ansible-playbook"]
+              command:
+                - /bin/sh
+                - -c
               args:
-                - "-i"
-                - "/app/inventory"
-                - "/app/playbook.yml"
+                - |
+                  set -e
+                  echo "▶ Running playbook: {{ .Values.ansible.selected }}"
+                  ansible-playbook \
+                    /playbooks/{{ .Values.ansible.selected }}-playbook.yml \
+                    -i /playbooks/{{ .Values.ansible.selected }}-inventory
               envFrom:
                 - secretRef:
                     name: {{ .Values.CronJob.secretName }}
               volumeMounts:
-                - name: ansible-files
-                  mountPath: /app
+                - name: ansible-playbooks
+                  mountPath: /playbooks
           volumes:
-            - name: ansible-files
+            - name: ansible-playbooks
               configMap:
                 name: {{ include "certificate-ui.fullname" . }}-ansible
 {{- end }}
